@@ -1,4 +1,4 @@
-<div class="login-form" style="min-height: 80vh; margin-top: 200px;">
+<div class="inscription-form" style="min-height: 80vh; margin-top: 100px;">
     <?php
     if (isset($_GET['reg_err'])) {
         $err = htmlspecialchars($_GET['reg_err']);
@@ -7,6 +7,36 @@
     ?>
                 <div class="alert alert-success">
                     <strong>Succès</strong> Inscription réussie !
+                </div>
+            <?php
+                break;
+            case 'prenom_length':
+            ?>
+                <div class="alert alert-danger">
+                    <strong>Erreur</strong> Veuillez mettre un prenom avec moins de 40 caractères
+                </div>
+            <?php
+                break;
+            case 'nom_length':
+            ?>
+                <div class="alert alert-danger">
+                    <strong>Erreur</strong> Veuillez mettre un nom avec moins de 40 caractères
+                </div>
+            <?php
+                break;
+
+            case 'adresse_length':
+            ?>
+                <div class="alert alert-danger">
+                    <strong>Erreur</strong> Veuillez mettre une adresse avec moins de 40 caractères
+                </div>
+            <?php
+                break;
+
+            case 'pseudo_length':
+            ?>
+                <div class="alert alert-danger">
+                    <strong>Erreur</strong> Veuillez mettre un pseudo avec moins de 20 caractères
                 </div>
             <?php
                 break;
@@ -44,9 +74,14 @@
                 </div>
 
                 <div class="form-group m-1">
-                    <input type="text" name="Adresse" class="form-control" placeholder="Adresse" value="<?php if (isset($_COOKIE["pseudonyme"])) {
-                                                                                                            echo $_COOKIE["pseudonyme"];
+                    <input type="text" name="Adresse" class="form-control" placeholder="Adresse" value="<?php if (isset($_COOKIE["adresse"])) {
+                                                                                                            echo $_COOKIE["adresse"];
                                                                                                         } ?>" required="required" autocomplete="off">
+                </div>
+                <div class="form-group m-1">
+                    <input type="text" name="Login" class="form-control" placeholder="Login" value="<?php if (isset($_COOKIE["login"])) {
+                                                                                                        echo $_COOKIE["login"];
+                                                                                                    } ?>" required="required" autocomplete="off">
                 </div>
                 <div class="form-group m-1">
                     <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="required" autocomplete="off">

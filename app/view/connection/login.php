@@ -1,4 +1,4 @@
-<div class="login-form" style="min-height: 80vh; margin-top: 200px;">
+<div class="login-form" style="min-height: 80vh; margin-top: 100px;">
     <?php
     if (isset($_GET['login_err'])) {
         $err = htmlspecialchars($_GET['login_err']);
@@ -12,7 +12,7 @@
             <?php
                 break;
 
-            case 'Pseudo':
+            case 'login':
             ?>
                 <div class="alert alert-danger">
                     <strong>Erreur</strong> Pseudo incorrect !
@@ -22,16 +22,16 @@
         }
     }
     ?>
-    <div class="container p-2 rounded" style="max-width: 400px;">
+    <div class="container p-2 rounded" style="max-width: 500px;">
         <div class="card-body">
             <form action="router.php?action=connection_traitement" method="post">
                 <h2 class="text-center">Connexion</h2>
                 <div class="form-group mb-1">
-                    <input type="text" name="Pseudo" class="form-control" placeholder="Pseudo" value="<?php if (isset($_COOKIE["username"])) {
-                                                                                                            echo $_COOKIE["username"];
-                                                                                                        } else if (isset($_COOKIE["mdpDif"])) {
-                                                                                                            echo $_COOKIE["mdpDif"];
-                                                                                                        } ?>" required="required" autocomplete="off">
+                    <input type="text" name="login" class="form-control" placeholder="Login" value="<?php if (isset($_COOKIE["username"])) {
+                                                                                                        echo $_COOKIE["username"];
+                                                                                                    } else if (isset($_COOKIE["mdpDif"])) {
+                                                                                                        echo $_COOKIE["mdpDif"];
+                                                                                                    } ?>" required="required" autocomplete="off">
                 </div>
                 <div class="form-group mb-1">
                     <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="required" autocomplete="off">
