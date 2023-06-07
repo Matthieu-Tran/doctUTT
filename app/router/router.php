@@ -22,6 +22,11 @@ require('../view/fragment/fragmentHeader.html');
 // --- Liste des méthodes autorisées
 switch ($action) {
 
+  case "inscription":
+  case "connexion":
+  case "inscription_traitement":
+  case "connection_traitement":
+    ControllerSite::$action();
     // Tache par défaut
   default:
     $action = "Accueil";
