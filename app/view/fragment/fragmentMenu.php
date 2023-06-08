@@ -71,8 +71,15 @@ session_start();
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Se connecter</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="router.php?action=connexion">Login</a></li>
-            <li><a class="dropdown-item" href="router.php?action=inscription">Inscription</a></li>
+            <?php
+            //Si la personne est connecté, alors on n'affiche pas le login et l'inscription
+            if (!isset($_SESSION['login'])) {
+            ?>
+              <li><a class="dropdown-item" href="router.php?action=connexion">Login</a></li>
+              <li><a class="dropdown-item" href="router.php?action=inscription">Inscription</a></li>
+            <?php
+            }
+            ?>
             <li><a class="dropdown-item" href="router.php?action=deconnexion">Déconnexion</a></li>
           </ul>
         </li>
