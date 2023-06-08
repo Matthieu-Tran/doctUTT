@@ -48,7 +48,9 @@ class ControllerSite
                 // if ($data['estModerateur'] == 1)
                 //     $_SESSION['Moderateur'] = 1;
                 // $_SESSION['numUtilisateur'] = $data['numUtilisateur'];
-                // $_SESSION['user'] = $data['pseudoUtilisateur'];
+                $_SESSION['statut'] = $personne->getStatut();
+                $_SESSION['login'] = $Login;
+                $_SESSION['personne'] = $personne;
                 header('Location: router.php?action=acceuil');
             } else {
                 setcookie("mdpDif", $_POST["login"], time() + 5);    // si l'utilisateur se trompe de mot de passe mais que le login est bon on initialise un cookie pour sauvegarder le login de l'utilisateur
@@ -86,6 +88,7 @@ class ControllerSite
             header('Location: router.php?action=inscription&reg_err=already');
             die();
         }
+        // Si le prénom est trop long alors on affiche une erreur pareil pour le nom, l'adresse et le login
         if (strlen($prenom) > 40) {
             setcookie("nomUtilisateur", $_POST["Nom"], time() + 5);
             setcookie("login", $_POST["Login"], time() + 5);
@@ -127,8 +130,19 @@ class ControllerSite
         $passwordHash = password_hash($password, PASSWORD_BCRYPT, $cost);
         // On insère dans la base de données
         ModelPersonne::insert($nom, $prenom, $adresse, $login, $passwordHash, $statut, $specialite);
+        $results = ModelPersonne::getUser($login);
+        $personne = $results[0];
+        $_SESSION['statut'] = $personne->getStatut();
         $_SESSION['login'] = $login;
+        $_SESSION['personne'] = $personne;
         header('Location: router.php?action=acceuil');
+        die();
+    }
+
+    public static function deconnexion()
+    {
+        session_destroy(); // on détruit la/les session(s), soit si vous utilisez une autre session, utilisez de préférence le unset()
+        header('Location: routeur.php?action=acceuil'); // On redirige
         die();
     }
 }
