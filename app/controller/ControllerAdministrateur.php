@@ -55,7 +55,7 @@ class ControleurAdministrateur
     {
         // Ajouter une validation des informations du formulaire
         $results = ModelSpecialite::insertSpecialite(
-            htmlspecialchars($_GET['nom'])
+            htmlspecialchars($_GET['label'])
         );
 
         // Construction du chemin de la vue

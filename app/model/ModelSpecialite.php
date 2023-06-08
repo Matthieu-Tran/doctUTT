@@ -66,13 +66,23 @@ class ModelSpecialite extends Model
     {
         try {
             $database = Model::getInstance();
-            $query = "INSERT INTO specialite (label) VALUES (:label)";
-            $stmt = $database->prepare($query);
-            $stmt->bindParam(':label', $label);
-            $stmt->execute();
-            return $database->lastInsertId();
+            // recherche de la valeur de la clé = max(id) + 1
+            $query = "select max(id) from specialite";
+            $statement = $database->query($query);
+            $tuple = $statement->fetch();
+            $id = $tuple['0'];
+            $id++;
+            // ajout d'un nouveau tuple;
+            $query = "insert into specialite value (:id, :label)";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'id' => $id,
+                'label' => $label,
+            ]);
+            return $id;
         } catch (PDOException $e) {
-            throw new Exception("Erreur lors de l'insertion de la spécialité: " . $e->getMessage());
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return -1;
         }
     }
 

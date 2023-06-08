@@ -33,6 +33,8 @@ switch ($action) {
   case "listeSpecialites":
   case "specialiteSelectionId":
   case "specialiteAfficher":
+  case "specialiteCreer":
+  case "specialiteInserer":
     ControleurAdministrateur::$action($args);
     break;
   case "inscription":

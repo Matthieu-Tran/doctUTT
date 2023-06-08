@@ -24,9 +24,9 @@ session_start();
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Administrateur</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="">Liste des spécialités</a></li>
-              <li><a class="dropdown-item" href="">Sélection d'une spécialité par son id</a></li>
-              <li><a class="dropdown-item" href="">Insertion d'une nouvelle spécialité</a></li>
+              <li><a class="dropdown-item" href="router.php?action=listeSpecialites">Liste des spécialités</a></li>
+              <li><a class="dropdown-item" href="router.php?action=specialiteSelectionId&target=specialiteAfficher">Sélection d'une spécialité par son id</a></li>
+              <li><a class="dropdown-item" href="router.php?action=specialiteCreer">Insertion d'une nouvelle spécialité</a></li>
               <hr>
               <li><a class="dropdown-item" href="">Liste des praticiens avec leur spécialité</a></li>
               <li><a class="dropdown-item" href="">Nombre de praticiens par patient</a></li>
