@@ -36,6 +36,7 @@ switch ($action) {
   case "specialiteCreer":
   case "specialiteInserer":
   case "praticienListeSpecialite":
+  case "nombrePraticiensParPatient":
     ControleurAdministrateur::$action($args);
     break;
   case "inscription":

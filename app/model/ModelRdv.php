@@ -154,6 +154,29 @@ class ModelRdv extends Model
             throw new Exception("Erreur lors de l'ajout du rendez-vous: " . $e->getMessage());
         }
     }
+
+    public static function getNombrePraticiensParPatient()
+    {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT CONCAT(nom, ' ', prenom) AS patient_name, COUNT(DISTINCT praticien_id) AS nombre_praticiens
+                      FROM rendezvous
+                      INNER JOIN personne ON rendezvous.patient_id = personne.id
+                      WHERE personne.statut = 2
+                      GROUP BY personne.id";
+            $statement = $database->prepare($query);
+            $statement->execute();
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $data = array(
+                'patient_name' => array_column($results, 'patient_name'),
+                'nombre_praticiens' => array_column($results, 'nombre_praticiens')
+            );
+            return $data;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 }
 ?>
 <!-- ----- fin ModelRdv -->

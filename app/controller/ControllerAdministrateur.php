@@ -77,11 +77,10 @@ class ControleurAdministrateur
     // Donne le nombre de praticiens par patient
     public static function nombrePraticiensParPatient()
     {
-        $results = ModelPersonne::getMany("SELECT COUNT(*) AS nb_praticiens, specialite_id FROM personne WHERE statut = " . ModelPersonne::PRATICIEN . " GROUP BY specialite_id");
-
+        $results = ModelRdv::getNombrePraticiensParPatient();
         // Construction du chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/praticien/viewNombrePraticiensParPatient.php';
+        $vue = $root . '/app/view/administrateur/viewNombrePraticiensParPatient.php';
         require($vue);
     }
 
