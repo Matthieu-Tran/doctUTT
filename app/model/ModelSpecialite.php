@@ -93,18 +93,16 @@ class ModelSpecialite extends Model
     {
         try {
             $database = Model::getInstance();
-            $query = "SELECT * FROM specialite WHERE id = :id";
-            $stmt = $database->prepare($query);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($result) {
-                return new ModelSpecialite($result['id'], $result['label']);
-            } else {
-                return NULL;
-            }
+            $query = "SELECT * from specialite where id = :id";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'id' => $id
+            ]);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelSpecialite");
+            return $results;
         } catch (PDOException $e) {
-            throw new Exception("Erreur lors de la récupération de la spécialité par ID: " . $e->getMessage());
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
         }
     }
 
