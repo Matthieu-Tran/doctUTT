@@ -2,6 +2,7 @@
 <?php
 require('../controller/ControllerSite.php');
 require('../controller/ControleurPraticien.php');
+require('../controller/ControllerAdministrateur.php');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -28,13 +29,19 @@ require('../view/fragment/fragmentMenu.php');
 switch ($action) {
   case "listerRdvPraticien":
     ControleurPraticien::$action($args);
-
+    break;
+  case "listeSpecialites":
+  case "specialiteSelectionId":
+  case "specialiteAfficher":
+    ControleurAdministrateur::$action($args);
+    break;
   case "inscription":
   case "connexion":
   case "deconnexion";
   case "inscription_traitement":
   case "connection_traitement":
     ControllerSite::$action();
+    break;
     // Tache par défaut
   default:
     $action = "Accueil";
