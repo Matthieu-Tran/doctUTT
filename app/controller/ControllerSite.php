@@ -1,4 +1,5 @@
 <?php
+
 require_once '../model/ModelPersonne.php';
 class ControllerSite
 {
@@ -37,8 +38,7 @@ class ControllerSite
         $Login = htmlspecialchars($_POST['login']);
         $password = htmlspecialchars($_POST['password']);
         $results = ModelPersonne::getUser($Login);
-
-        $row = (count($results));
+        $row = count($results);
         if ($row > 0) {
             $personne = $results[0];
             $mdp = $personne->getPassword();
@@ -48,22 +48,26 @@ class ControllerSite
                 // if ($data['estModerateur'] == 1)
                 //     $_SESSION['Moderateur'] = 1;
                 // $_SESSION['numUtilisateur'] = $data['numUtilisateur'];
-                $_SESSION['statut'] = $personne->getStatut();
+                $statut = $personne->getStatut();
+                $statutLabel = $personne->getStatusLabel($statut);
+                $_SESSION['statut'] = $statutLabel;
                 $_SESSION['login'] = $Login;
                 $_SESSION['personne'] = $personne;
-                header('Location: router.php?action=acceuil');
+                echo '<script>window.location.href = "router.php?action=acceuil";</script>';
+                die();
             } else {
                 setcookie("mdpDif", $_POST["login"], time() + 5);    // si l'utilisateur se trompe de mot de passe mais que le login est bon on initialise un cookie pour sauvegarder le login de l'utilisateur
-                header('Location: router.php?action=connexion&login_err=password');
+                echo '<script>window.location.href = "router.php?action=connexion&login_err=password";</script>';
                 die();
             }
         } else {
-            header('Location: router.php?action=connexion&login_err=login');
+            echo '<script>window.location.href = "router.php?action=connexion&login_err=login";</script>';
             die();
         }
         // ----- Construction chemin de la vue
         include 'config.php';
     }
+
 
     public static function inscription_traitement()
     {
@@ -78,14 +82,14 @@ class ControllerSite
         $statut = htmlspecialchars($_POST['statut']);
         $login = htmlspecialchars($_POST['Login']);
         $results = ModelPersonne::getUser($login);
-        $rowCount = (count($results));
+        $rowCount = count($results);
 
         // Si la requete renvoie un utilsateur alors, il existe deja
         if ($rowCount != 0) {
             setcookie("nomUtilisateur", $_POST["Nom"], time() + 5);
             setcookie("prenomUtilisateur", $_POST["Prenom"], time() + 5);
             setcookie("adresse", $_POST["Adresse"], time() + 5);
-            header('Location: router.php?action=inscription&reg_err=already');
+            echo '<script>window.location.href = "router.php?action=inscription&reg_err=already";</script>';
             die();
         }
         // Si le prénom est trop long alors on affiche une erreur pareil pour le nom, l'adresse et le login
@@ -93,28 +97,28 @@ class ControllerSite
             setcookie("nomUtilisateur", $_POST["Nom"], time() + 5);
             setcookie("login", $_POST["Login"], time() + 5);
             setcookie("adresse", $_POST["Adresse"], time() + 5);
-            header('Location: router.php?action=inscription&reg_err=prenom_length');
+            echo '<script>window.location.href = "router.php?action=inscription&reg_err=prenom_length";</script>';
             die();
         }
         if (strlen($nom) > 40) {
             setcookie("prenomUtilisateur", $_POST["Prenom"], time() + 5);
             setcookie("login", $_POST["Login"], time() + 5);
             setcookie("adresse", $_POST["Adresse"], time() + 5);
-            header('Location: router.php?action=inscription&reg_err=nom_length');
+            echo '<script>window.location.href = "router.php?action=inscription&reg_err=nom_length";</script>';
             die();
         }
         if (strlen($adresse) > 40) {
             setcookie("prenomUtilisateur", $_POST["Prenom"], time() + 5);
             setcookie("nomUtilisateur", $_POST["Nom"], time() + 5);
             setcookie("login", $_POST["Login"], time() + 5);
-            header('Location: router.php?action=inscription&reg_err=adresse_length');
+            echo '<script>window.location.href = "router.php?action=inscription&reg_err=adresse_length";</script>';
             die();
         }
         if (strlen($login) > 20) { // On verifie que la longueur du login <= 100
             setcookie("nomUtilisateur", $_POST["Nom"], time() + 5);
             setcookie("prenomUtilisateur", $_POST["Prenom"], time() + 5);
             setcookie("adresse", $_POST["Adresse"], time() + 5);
-            header('Location: router.php?action=inscription&reg_err=pseudo_length');
+            echo '<script>window.location.href = "router.php?action=inscription&reg_err=pseudo_length";</script>';
             die();
         }
         if ($password != $password_retype) { // si les deux mdp saisis sont bon
@@ -122,7 +126,7 @@ class ControllerSite
             setcookie("nomUtilisateur", $_POST["Nom"], time() + 5);
             setcookie("prenomUtilisateur", $_POST["Prenom"], time() + 5);
             setcookie("adresse", $_POST["Adresse"], time() + 5);
-            header('Location: router.php?action=inscription&reg_err=password');
+            echo '<script>window.location.href = "router.php?action=inscription&reg_err=password";</script>';
             die();
         }
         // On hash le mot de passe avec Bcrypt, via un coût de 12
@@ -132,17 +136,20 @@ class ControllerSite
         ModelPersonne::insert($nom, $prenom, $adresse, $login, $passwordHash, $statut, $specialite);
         $results = ModelPersonne::getUser($login);
         $personne = $results[0];
-        $_SESSION['statut'] = $personne->getStatut();
+        $statut = $personne->getStatut();
+        $statutLabel = $personne->getStatusLabel($statut);
+        $_SESSION['statut'] = $statutLabel;
         $_SESSION['login'] = $login;
         $_SESSION['personne'] = $personne;
-        header('Location: router.php?action=acceuil');
+        echo '<script>window.location.href = "router.php?action=acceuil";</script>';
         die();
     }
+
 
     public static function deconnexion()
     {
         session_destroy(); // on détruit la/les session(s), soit si vous utilisez une autre session, utilisez de préférence le unset()
-        header('Location: routeur.php?action=acceuil'); // On redirige
+        echo '<script>window.location.href = "router.php?action=acceuil";</script>'; // On redirige
         die();
     }
 }

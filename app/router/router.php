@@ -17,13 +17,15 @@ unset($param['action']);
 
 // --- tout ce qui reste sont des arguments 
 $args = $param;
-
 require('../view/fragment/fragmentHeader.html');
+
 // --- Liste des méthodes autorisées
+require('../view/fragment/fragmentMenu.php');
 switch ($action) {
 
   case "inscription":
   case "connexion":
+  case "deconnexion";
   case "inscription_traitement":
   case "connection_traitement":
     ControllerSite::$action();
@@ -32,6 +34,7 @@ switch ($action) {
     $action = "Accueil";
     ControllerSite::$action();
 }
+
 require('../view/fragment/fragmentFooter.html');
 ?>
 <!-- ----- Fin Router1 -->
