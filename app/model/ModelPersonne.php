@@ -178,8 +178,8 @@ class ModelPersonne
             $statement->execute([
                 'id' => $id
             ]);
-            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
-            return $results;
+            $result = $statement->fetchObject(self::class);
+            return $result;
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;
@@ -208,7 +208,7 @@ class ModelPersonne
         try {
             $database = Model::getInstance();
 
-            // Recherche de la valeur de la clÃ© = max(id) + 1
+            // Recherche de la valeur de la clé = max(id) + 1
             $query = "SELECT MAX(id) FROM personne";
             $statement = $database->query($query);
             $tuple = $statement->fetch();
