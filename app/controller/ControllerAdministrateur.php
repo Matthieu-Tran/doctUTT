@@ -67,11 +67,10 @@ class ControleurAdministrateur
     // Liste des praticiens avec leurs spécialités
     public static function praticienListeSpecialite()
     {
-        $results = ModelPersonne::getMany("SELECT * FROM personne WHERE statut = " . ModelPersonne::PRATICIEN);
-
+        $results = ModelSpecialite::getPraticiensParSpecialite();
         // Construction du chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/praticien/viewListeSpecialite.php';
+        $vue = $root . '/app/view/administrateur/viewListePraticiensParSpecialite.php';
         require($vue);
     }
 

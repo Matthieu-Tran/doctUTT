@@ -29,6 +29,32 @@ class ModelSpecialite extends Model
         return $this->label;
     }
 
+
+    public static function getPraticiensParSpecialite()
+    {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT p.id, p.nom, p.prenom, p.adresse, s.label as specialite 
+                  FROM personne p
+                  INNER JOIN specialite s ON p.specialite_id = s.id
+                  WHERE p.statut = 1
+                  ORDER BY s.label";
+            $statement = $database->prepare($query);
+            $statement->execute();
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $attributes = array_keys($results[0]); // Obtient les noms des attributs
+            $data = array(
+                'attributes' => $attributes,
+                'tuples' => $results
+            );
+            return $data;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
+
     public static function getAll()
     {
         try {

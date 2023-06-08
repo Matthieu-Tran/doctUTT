@@ -28,7 +28,7 @@ session_start();
               <li><a class="dropdown-item" href="router.php?action=specialiteSelectionId&target=specialiteAfficher">Sélection d'une spécialité par son id</a></li>
               <li><a class="dropdown-item" href="router.php?action=specialiteCreer">Insertion d'une nouvelle spécialité</a></li>
               <hr>
-              <li><a class="dropdown-item" href="">Liste des praticiens avec leur spécialité</a></li>
+              <li><a class="dropdown-item" href="router.php?action=praticienListeSpecialite">Liste des praticiens avec leur spécialité</a></li>
               <li><a class="dropdown-item" href="">Nombre de praticiens par patient</a></li>
               <hr>
               <li><a class="dropdown-item" href="">Info</a></li>
