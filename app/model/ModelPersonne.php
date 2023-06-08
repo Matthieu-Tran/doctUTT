@@ -121,7 +121,7 @@ class ModelPersonne
             case self::PATIENT:
                 return "Patient";
             default:
-                return "Inconnu";
+                return "";
         }
     }
 
