@@ -25,7 +25,7 @@ class ControleurAdministrateur
 
         // Construction du chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/specialite/viewSelectionId.php';
+        $vue = $root . '/app/view/administrateur/viewSelectionId.php';
         require($vue);
     }
 
@@ -37,7 +37,7 @@ class ControleurAdministrateur
 
         // Construction du chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/specialite/viewListe.php';
+        $vue = $root . '/app/view/administrateur/viewListeSpecialites.php';
         require($vue);
     }
 
@@ -93,7 +93,7 @@ class ControleurAdministrateur
 
         // Construction du chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/viewListeSpecialites.php';
+        $vue = $root . '/app/view/administrateur/viewListeSpecialites.php';
         require($vue);
     }
 
