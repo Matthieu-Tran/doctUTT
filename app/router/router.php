@@ -1,7 +1,9 @@
 <!-- ----- debut Router1 -->
 <?php
-require('../controller/ControllerSite.php');
+require('../controller/ControlerSite.php');
 require('../controller/ControleurPraticien.php');
+require('../controller/ControlerAdministrateur.php');
+require('../controller/ControlerPatient.php');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -22,16 +24,19 @@ unset($param['action']);
 // --- tout ce qui reste sont des arguments 
 $args = $param;
 
-require('../view/fragment/fragmentHeader.html');
 // --- Liste des méthodes autorisées
 switch ($action) {
   case "listerRdvPraticien":
+  case "afficherRdvDisponibles":
+  case "ajouterDisponibilite":
+  case "rdvCreate":
+  case "rdvCreated":
+  case "listerPatientPraticien":
     ControleurPraticien::$action($args);
     // Tache par défaut
   default:
     $action = "Accueil";
     ControllerSite::$action();
 }
-require('../view/fragment/fragmentFooter.html');
 ?>
 <!-- ----- Fin Router1 -->

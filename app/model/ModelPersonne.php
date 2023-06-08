@@ -186,6 +186,29 @@ class ModelPersonne
         }
     }
 
+    public static function listePatientsPraticien($praticienId)
+    {
+        try {
+            $database = Model::getInstance();
+
+            // Sélectionner les rendez-vous distincts pour le praticien
+            $query = "SELECT DISTINCT personne.id, personne.nom, personne.prenom, personne.adresse
+                  FROM personne
+                  INNER JOIN rendezvous ON personne.id = rendezvous.patient_id
+                  WHERE rendezvous.praticien_id = :praticienId AND personne.id > 0";
+            $stmt = $database->prepare($query);
+            $stmt->bindParam(':praticienId', $praticienId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $results = $stmt->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
+
+            return $results;
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la récupération de la liste des patients : " . $e->getMessage());
+        }
+    }
+
+
 
     public static function insert($nom, $prenom, $adresse, $login, $password, $statut, $specialite_id)
     {
