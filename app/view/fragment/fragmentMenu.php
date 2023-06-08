@@ -20,7 +20,7 @@ session_start();
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <?php if ((isset($_SESSION['login'])) && ($_SESSION['statut'] = "Administrateur")) { ?>
+        <?php if ((isset($_SESSION['login'])) && ($_SESSION['statut'] == "Administrateur")) { ?>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Administrateur</a>
             <ul class="dropdown-menu">
@@ -35,7 +35,7 @@ session_start();
             </ul>
           </li>
         <?php
-        } else if ((isset($_SESSION['login'])) && ($_SESSION['statut'] = "Praticien")) { ?>
+        } else if ((isset($_SESSION['login'])) && ($_SESSION['statut'] == "Praticien")) { ?>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Praticien</a>
             <ul class="dropdown-menu">
@@ -47,7 +47,7 @@ session_start();
             </ul>
           </li>
         <?php
-        } else if ((isset($_SESSION['login'])) && ($_SESSION['statut'] = "Patient")) { ?>
+        } else if ((isset($_SESSION['login'])) && ($_SESSION['statut'] == "Patient")) { ?>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Patient</a>

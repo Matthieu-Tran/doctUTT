@@ -136,7 +136,6 @@ class ControllerSite
         ModelPersonne::insert($nom, $prenom, $adresse, $login, $passwordHash, $statut, $specialite);
         $results = ModelPersonne::getUser($login);
         $personne = $results[0];
-        $statut = $personne->getStatut();
         $statutLabel = $personne->getStatusLabel($statut);
         $_SESSION['statut'] = $statutLabel;
         $_SESSION['login'] = $login;
