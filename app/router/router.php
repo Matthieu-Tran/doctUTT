@@ -1,6 +1,10 @@
 <!-- ----- debut Router1 -->
 <?php
 require('../controller/ControllerSite.php');
+require('../controller/ControleurPraticien.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -21,7 +25,8 @@ $args = $param;
 require('../view/fragment/fragmentHeader.html');
 // --- Liste des méthodes autorisées
 switch ($action) {
-
+  case "listerRdvPraticien":
+    ControleurPraticien::$action($args);
     // Tache par défaut
   default:
     $action = "Accueil";
