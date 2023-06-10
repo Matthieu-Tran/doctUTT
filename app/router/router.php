@@ -3,7 +3,7 @@
 require('../controller/ControlerSite.php');
 require('../controller/ControleurPraticien.php');
 require('../controller/ControlerAdministrateur.php');
-require('../controller/ControlerPatient.php');
+require('../controller/ControleurPatient.php');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -33,6 +33,13 @@ switch ($action) {
   case "rdvCreated":
   case "listerPatientPraticien":
     ControleurPraticien::$action($args);
+    break;
+  case "afficherInfosCompte":
+  case "listerRdvPatient":
+  case "listerRdvDispoPraticien":
+  case "selectionnezRdv":
+  case "updateRdv":
+    ControleurPatient::$action($args);
     // Tache par défaut
   default:
     $action = "Accueil";

@@ -23,6 +23,26 @@ class ModelRdv extends Model
         }
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setPatientId($patient_id)
+    {
+        $this->patient_id = $patient_id;
+    }
+
+    public function setPraticienId($praticien_id)
+    {
+        $this->praticien_id = $praticien_id;
+    }
+
+    public function setRdvDate($rdv_date)
+    {
+        $this->rdv_date = $rdv_date;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -42,6 +62,23 @@ class ModelRdv extends Model
     {
         return $this->rdv_date;
     }
+
+    public static function getOne($idRdv)
+    {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT * FROM rendezvous WHERE id = :id";
+            $statement = $database->prepare($query);
+            $statement->bindParam(':id', $idRdv, PDO::PARAM_INT);
+            $statement->execute();
+            $result = $statement->fetchObject(self::class);
+            return $result;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
 
     public static function getAll()
     {
@@ -116,6 +153,30 @@ class ModelRdv extends Model
             $stmt->bindParam(':rdvDate', $rdvDate);
             $stmt->execute();
             return $database->lastInsertId();
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de l'ajout du rendez-vous: " . $e->getMessage());
+        }
+    }
+
+    public static function updateRdv($rdvId, $patientId)
+    {
+        try {
+            $database = Model::getInstance();
+            // Requête de mise à jour
+            $query = "UPDATE rendezvous SET patient_id = :patientId WHERE id = :rdvId";
+            $stmt = $database->prepare($query);
+            $stmt->bindParam(':patientId', $patientId, PDO::PARAM_INT);
+            $stmt->bindParam(':rdvId', $rdvId, PDO::PARAM_INT);
+
+            // Exécution de la requête
+            $stmt->execute();
+
+            // Vérification du succès de la mise à jour
+            if ($stmt->rowCount() > 0) {
+                return true; // La modification a été effectuée avec succès
+            } else {
+                return false; // La modification a échoué
+            }
         } catch (PDOException $e) {
             throw new Exception("Erreur lors de l'ajout du rendez-vous: " . $e->getMessage());
         }

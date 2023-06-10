@@ -11,7 +11,7 @@ class ControleurPraticien
     {
         // ----- Construction chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/rdv/viewInsertRdv.php';
+        $vue = $root . '/app/view/praticien/viewInsertRdv.php';
         require($vue);
     }
 
@@ -23,7 +23,7 @@ class ControleurPraticien
         $rdvsDisponibles = ModelRdv::getRdvDisponibles($praticienId);
 
         include 'config.php';
-        $vue = $root . '/app/view/rdv/viewAllrdv.php';
+        $vue = $root . '/app/view/praticien/viewAllrdv.php';
         if (DEBUG)
             echo ("ControleurPraticien : afficherRdvDisponibles : vue = $vue");
         require($vue);
@@ -43,7 +43,7 @@ class ControleurPraticien
             $results = ModelRdv::ajouterRdvDisponibles($praticienId, $date, $nombreRdv);
             // ----- Construction chemin de la vue
             include 'config.php';
-            $vue = $root . '/app/view/rdv/viewInsertedRdv.php';
+            $vue = $root . '/app/view/praticien/viewInsertedRdv.php';
             require($vue);
         }
     }
@@ -58,7 +58,7 @@ class ControleurPraticien
 
         // ----- Construction chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/rdv/viewAllRdvPatient.php';
+        $vue = $root . '/app/view/praticien/viewAllRdvPatient.php';
         require($vue);
     }
 
@@ -72,7 +72,7 @@ class ControleurPraticien
 
         // ----- Construction chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/rdv/viewAllPatient.php';
+        $vue = $root . '/app/view/praticien/viewAllPatient.php';
         require($vue);
     }
 }

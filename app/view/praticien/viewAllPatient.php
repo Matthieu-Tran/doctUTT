@@ -1,6 +1,4 @@
-<!-- ----- début viewAll -->
 <?php
-
 require($root . '/app/view/fragment/fragmentHeader.html');
 ?>
 
@@ -13,21 +11,19 @@ require($root . '/app/view/fragment/fragmentHeader.html');
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">patient_id</th>
-                    <th scope="col">praticien_id</th>
-                    <th scope="col">rdv_date</th>
+                    <th scope="col">nom</th>
+                    <th scope="col">prenom</th>
+                    <th scope="col">Adresse</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                foreach ($rdvsDisponibles as $rdv) {
+                foreach ($listePatients as $patient) {
                     printf(
-                        "<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td></tr>",
-                        $rdv->getId(),
-                        $rdv->getPatientId(),
-                        $rdv->getPraticienId(),
-                        $rdv->getRdvDate()
+                        "<tr><td>%s</td><td>%s</td><td>%s</td></tr>",
+                        $patient->getNom(),
+                        $patient->getPrenom(),
+                        $patient->getAdresse()
                     );
                 }
                 ?>
