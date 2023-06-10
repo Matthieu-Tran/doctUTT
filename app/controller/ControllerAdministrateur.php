@@ -138,4 +138,19 @@ class ControleurAdministrateur
         $vue = $root . '/app/view/viewListeRendezVous.php';
         require($vue);
     }
+
+    // Liste des spécialités, praticiens, patients, administrateurs, rendez-vous
+    public static function infoAdmin()
+    {
+        $listeSpecialites = ModelSpecialite::getAll();
+        $listePraticiens = ModelPersonne::getMany("SELECT id, nom, prenom, adresse  FROM personne WHERE statut = " . ModelPersonne::PRATICIEN);
+        $listePatients = ModelPersonne::getMany("SELECT id, nom, prenom, adresse FROM personne WHERE statut = " . ModelPersonne::PATIENT);
+        $listeAdministrateurs = ModelPersonne::getMany("SELECT id, nom, prenom, adresse FROM personne WHERE statut = " . ModelPersonne::ADMINISTRATEUR);
+        $listeRendezVous = ModelRdv::getAll();
+
+        // Construction du chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/administrateur/infoAdmin.php';
+        require($vue);
+    }
 }

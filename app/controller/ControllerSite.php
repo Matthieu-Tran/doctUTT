@@ -43,11 +43,6 @@ class ControllerSite
             $personne = $results[0];
             $mdp = $personne->getPassword();
             if (password_verify($password, $mdp)) {
-                // if ($data['estAdmin'] == 1)
-                //     $_SESSION['Admin'] = 1;
-                // if ($data['estModerateur'] == 1)
-                //     $_SESSION['Moderateur'] = 1;
-                // $_SESSION['numUtilisateur'] = $data['numUtilisateur'];
                 $statut = $personne->getStatut();
                 $statutLabel = $personne->getStatusLabel($statut);
                 $_SESSION['statut'] = $statutLabel;
