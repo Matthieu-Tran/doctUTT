@@ -1,8 +1,13 @@
 <!-- ----- debut Router1 -->
 <?php
-require('../controller/ControllerSite.php');
+require('../controller/ControlerSite.php');
 require('../controller/ControleurPraticien.php');
+<<<<<<< HEAD
 require('../controller/ControllerAdministrateur.php');
+=======
+require('../controller/ControlerAdministrateur.php');
+require('../controller/ControleurPatient.php');
+>>>>>>> featureInit
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -22,14 +27,23 @@ unset($param['action']);
 
 // --- tout ce qui reste sont des arguments 
 $args = $param;
+<<<<<<< HEAD
 require('../view/fragment/fragmentHeader.html');
+=======
+>>>>>>> featureInit
 
 // --- Liste des méthodes autorisées
 require('../view/fragment/fragmentMenu.php');
 switch ($action) {
   case "listerRdvPraticien":
+  case "afficherRdvDisponibles":
+  case "ajouterDisponibilite":
+  case "rdvCreate":
+  case "rdvCreated":
+  case "listerPatientPraticien":
     ControleurPraticien::$action($args);
     break;
+<<<<<<< HEAD
   case "listeSpecialites":
   case "specialiteSelectionId":
   case "specialiteAfficher":
@@ -47,12 +61,23 @@ switch ($action) {
   case "connection_traitement":
     ControllerSite::$action();
     break;
+=======
+  case "afficherInfosCompte":
+  case "listerRdvPatient":
+  case "listerRdvDispoPraticien":
+  case "selectionnezRdv":
+  case "updateRdv":
+    ControleurPatient::$action($args);
+>>>>>>> featureInit
     // Tache par défaut
   default:
     $action = "Accueil";
     ControllerSite::$action();
 }
+<<<<<<< HEAD
 
 require('../view/fragment/fragmentFooter.html');
+=======
+>>>>>>> featureInit
 ?>
 <!-- ----- Fin Router1 -->

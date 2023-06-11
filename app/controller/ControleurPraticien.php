@@ -6,30 +6,47 @@ require_once '../model/ModelRdv.php';
 
 class ControleurPraticien
 {
-    public function afficherRdvDisponibles()
+
+    public static function rdvCreate()
     {
-        // Récupérer l'ID du praticien connecté
-        $praticienId = $_SESSION['praticien_id'];
-
-        // Récupérer les rendez-vous disponibles du praticien
-        $rdvsDisponibles = ModelRdv::getRdvDisponibles($praticienId);
-
-        // Afficher les rendez-vous disponibles
-        foreach ($rdvsDisponibles as $rdv) {
-            echo "Rendez-vous disponible - Date: " . $rdv->getRdvDate() . " - Nombre de places disponibles: " . $rdv->getNombrePlacesDisponibles() . "<br>";
-        }
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/praticien/viewInsertRdv.php';
+        require($vue);
     }
 
-    /*public function ajouterDisponibilite($date, $nombreRdv)
+    public static function afficherRdvDisponibles()
     {
         // Récupérer l'ID du praticien connecté
-        $praticienId = $_SESSION['praticien_id'];
+        //$praticienId = $_SESSION['praticien_id'];
+        $praticienId = 50;
+        $rdvsDisponibles = ModelRdv::getRdvDisponibles($praticienId);
 
-        // Ajouter une nouvelle disponibilité
-        ModelRdv::ajouterDisponibilite($praticienId, $date, $nombreRdv);
+        include 'config.php';
+        $vue = $root . '/app/view/praticien/viewAllrdv.php';
+        if (DEBUG)
+            echo ("ControleurPraticien : afficherRdvDisponibles : vue = $vue");
+        require($vue);
+    }
 
-        echo "La disponibilité a été ajoutée avec succès.";
-    }*/
+    public static function rdvCreated()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $datePost = $_POST["date"];
+            $nombreRdv = $_POST["nombre_rdv"];
+            // Récupérer l'ID du praticien connecté
+            //$praticienId = $_SESSION['praticien_id'];
+            $praticienId = 50;
+            $date = $datePost . " " . "à 10h00";
+
+            // Ajouter une nouvelle disponibilité
+            $results = ModelRdv::ajouterRdvDisponibles($praticienId, $date, $nombreRdv);
+            // ----- Construction chemin de la vue
+            include 'config.php';
+            $vue = $root . '/app/view/praticien/viewInsertedRdv.php';
+            require($vue);
+        }
+    }
 
     public static function listerRdvPraticien()
     {
@@ -39,11 +56,23 @@ class ControleurPraticien
         // Récupérer tous les rendez-vous du praticien
         $rdvsPraticien = ModelRdv::getRdvByPraticien($praticienId);
 
-        // Afficher les rendez-vous avec les noms des patients
-        foreach ($rdvsPraticien as $rdv) {
-            $patientNom = ModelPersonne::getOne($rdv->getPatientId());
-            $rdvDate = $rdv->getRdvDate();
-            echo "Rendez-vous avec " . $patientNom->getPrenom() . " - Date: " . $rdvDate . "<br>";
-        }
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/praticien/viewAllRdvPatient.php';
+        require($vue);
+    }
+
+    public static function listerPatientPraticien()
+    {
+        // Récupérer l'ID du praticien connecté
+        //$praticienId = $_SESSION['praticien_id'];
+        $praticienId = 50;
+        // Récupérer tous les rendez-vous du praticien
+        $listePatients = ModelPersonne::listePatientsPraticien($praticienId);
+
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/praticien/viewAllPatient.php';
+        require($vue);
     }
 }

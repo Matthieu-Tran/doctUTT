@@ -39,11 +39,15 @@ session_start();
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Praticien</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="">Liste de mes disponibilités</a></li>
-              <li><a class="dropdown-item" href="">Ajout de nouvelles disponibilités</a></li>
+              <li><a class="dropdown-item" href="router.php?action=afficherRdvDisponibles">Liste de mes disponibilités</a>
+              </li>
+              <li><a class="dropdown-item" href="router.php?action=rdvCreate">Ajout de nouvelles
+                  disponibilités</a></li>
               <hr>
-              <li><a class="dropdown-item" href="">Liste des rendez-vous avec le nom des patients</a></li>
-              <li><a class="dropdown-item" href="">Liste de mes patients (sans doublon)</a></li>
+              <li><a class="dropdown-item" href="router.php?action=listerRdvPraticien">Liste des rendez-vous avec le nom
+                  des patients</a></li>
+              <li><a class="dropdown-item" href="router.php?action=listerPatientPraticien">Liste de mes patients (sans
+                  doublon)</a></li>
             </ul>
           </li>
         <?php
@@ -52,9 +56,10 @@ session_start();
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Patient</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="">MonCompte</a></li>
-              <li><a class="dropdown-item" href="">Liste de mes rendez-vous</a></li>
-              <li><a class="dropdown-item" href="">Prendre un RDV avec un praticien</a></li>
+              <li><a class="dropdown-item" href="router.php?action=afficherInfosCompte">MonCompte</a></li>
+              <li><a class="dropdown-item" href="router.php?action=listerRdvPatient">Liste de mes rendez-vous</a></li>
+              <li><a class="dropdown-item" href="router.php?action=listerRdvDispoPraticien">Prendre un RDV avec un
+                  praticien</a></li>
             </ul>
           </li>
         <?php

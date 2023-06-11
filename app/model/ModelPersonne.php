@@ -140,6 +140,22 @@ class ModelPersonne
         }
     }
 
+    public static function getAllPraticiens()
+    {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT * FROM personne WHERE statut = :statut";
+            $stmt = $database->prepare($query);
+            $stmt->bindValue(':statut', ModelPersonne::PRATICIEN, PDO::PARAM_INT);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
     public static function getMany($query)
     {
         try {
@@ -186,6 +202,7 @@ class ModelPersonne
         }
     }
 
+<<<<<<< HEAD
     public static function getUser($login)
     {
         try {
@@ -202,6 +219,67 @@ class ModelPersonne
             return NULL;
         }
     }
+=======
+    public static function listePatientsPraticien($praticienId)
+    {
+        try {
+            $database = Model::getInstance();
+
+            // Sélectionner les rendez-vous distincts pour le praticien
+            $query = "SELECT DISTINCT personne.id, personne.nom, personne.prenom, personne.adresse
+                  FROM personne
+                  INNER JOIN rendezvous ON personne.id = rendezvous.patient_id
+                  WHERE rendezvous.praticien_id = :praticienId AND personne.id > 0";
+            $stmt = $database->prepare($query);
+            $stmt->bindParam(':praticienId', $praticienId, PDO::PARAM_INT);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
+
+            return $results;
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la récupération de la liste des patients : " . $e->getMessage());
+        }
+    }
+
+    public static function listeRdvPatient($patientId)
+    {
+        try {
+            $database = Model::getInstance();
+
+            // Requête pour récupérer les rendez-vous du patient avec les informations du praticien
+            $query = "SELECT rdv.id, rdv.rdv_date, p.nom, p.prenom
+          FROM rendezvous AS rdv
+          INNER JOIN personne AS p ON rdv.praticien_id = p.id
+          WHERE rdv.patient_id = :patientId";
+            $stmt = $database->prepare($query);
+            $stmt->bindParam(':patientId', $patientId, PDO::PARAM_INT);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la récupération des rendez-vous du patient : " . $e->getMessage());
+        }
+    }
+
+    public static function getInformationsCompte($patientId)
+    {
+        try {
+            $database = Model::getInstance();
+
+            // Requête pour récupérer les informations du compte patient
+            $query = "SELECT * FROM personne WHERE id = :patientId";
+            $stmt = $database->prepare($query);
+            $stmt->bindParam(':patientId', $patientId, PDO::PARAM_INT);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
+            return $results;
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la récupération des informations du compte patient : " . $e->getMessage());
+        }
+    }
+
+
+>>>>>>> featureInit
 
     public static function insert($nom, $prenom, $adresse, $login, $password, $statut, $specialite_id)
     {
