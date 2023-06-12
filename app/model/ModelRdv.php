@@ -226,7 +226,7 @@ class ModelRdv extends Model
             $nouvelleDate = str_replace($heure . "h", " " . str_pad($nouvelleHeure, 2, "0", STR_PAD_LEFT) . "h", $date);
 
             // Insérer les nouveaux rendez-vous
-            $query = "INSERT INTO rendezvous (id, praticien_id, rdv_date) VALUES (:id, :praticienId, :date)";
+            $query = "INSERT INTO rendezvous (id, patient_id, praticien_id, rdv_date) VALUES (:id,0 ,:praticienId, :date)";
             $stmt = $database->prepare($query);
 
 

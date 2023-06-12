@@ -7,8 +7,7 @@ class ControleurPatient
 {
     public static function afficherInfosCompte()
     {
-        //$patienId = $_SESSION['id'];
-        $patientId = 201;
+        $patientId = $_SESSION['id'];
 
         $results = ModelPersonne::getInformationsCompte($patientId);
         //Construction de la vue
@@ -19,8 +18,7 @@ class ControleurPatient
 
     public static function listerRdvPatient()
     {
-        //$patienId = $_SESSION['id'];
-        $patientId = 205;
+        $patientId = $_SESSION['id'];
         $results = ModelPersonne::listeRdvPatient($patientId);
 
         //Construction de la vue
@@ -59,8 +57,7 @@ class ControleurPatient
     {
         if (isset($_POST['rdv'])) {
             $rdvId = $_POST['rdv'];
-            //$patienId = $_SESSION['id'];
-            $patientId = 205;
+            $patientId = $_SESSION['id'];
             $result = ModelRdv::updateRdv($rdvId, $patientId);
             $rdv = ModelRdv::getOne($rdvId);
 

@@ -4,15 +4,10 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require($root . '/app/view/fragment/fragmentHeader.html');
 ?>
 
 <body>
     <div class="container">
-        <?php
-        include $root . '/app/view/fragment/fragmentMenu.html';
-        include $root . '/app/view/fragment/fragmentJumbotron.html';
-        ?>
         <form action="router.php?action=selectionnezRdv" method="post">
             <input type="hidden" name='action' value='selectionnezRdv'>
             <label for="praticien">Sélectionnez un praticien :</label>

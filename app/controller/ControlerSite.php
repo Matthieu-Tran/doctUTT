@@ -45,6 +45,7 @@ class ControllerSite
             if (password_verify($password, $mdp)) {
                 $statut = $personne->getStatut();
                 $statutLabel = $personne->getStatusLabel($statut);
+                $_SESSION['id'] = $personne->getId();
                 $_SESSION['statut'] = $statutLabel;
                 $_SESSION['login'] = $Login;
                 $_SESSION['personne'] = $personne;
@@ -132,6 +133,7 @@ class ControllerSite
         $results = ModelPersonne::getUser($login);
         $personne = $results[0];
         $statutLabel = $personne->getStatusLabel($statut);
+        $_SESSION['id'] = $personne->getId();
         $_SESSION['statut'] = $statutLabel;
         $_SESSION['login'] = $login;
         $_SESSION['personne'] = $personne;

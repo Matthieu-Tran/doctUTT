@@ -202,7 +202,6 @@ class ModelPersonne
         }
     }
 
-<<<<<<< HEAD
     public static function getUser($login)
     {
         try {
@@ -219,7 +218,6 @@ class ModelPersonne
             return NULL;
         }
     }
-=======
     public static function listePatientsPraticien($praticienId)
     {
         try {
@@ -279,7 +277,6 @@ class ModelPersonne
     }
 
 
->>>>>>> featureInit
 
     public static function insert($nom, $prenom, $adresse, $login, $password, $statut, $specialite_id)
     {

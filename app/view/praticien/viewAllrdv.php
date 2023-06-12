@@ -1,14 +1,7 @@
 <!-- ----- début viewAll -->
-<?php
-require($root . '/app/view/fragment/fragmentHeader.html');
-?>
 
 <body>
     <div class="container">
-        <?php
-        include $root . '/app/view/fragment/fragmentMenu.html';
-        include $root . '/app/view/fragment/fragmentJumbotron.html';
-        ?>
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
