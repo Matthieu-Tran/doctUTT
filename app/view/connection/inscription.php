@@ -98,7 +98,7 @@
                     </select>
                 </div>
 
-                <div class="form-group m-1">
+                <div class="form-group m-1 specialite-select" id="specialite-div" style="display: none;">
                     <label for="specialite-select">Votre spécialité si vous êtes praticien</label>
                     <select name="specialite" id="specialite-select" class="form-control">
                         <option value="0">Je ne suis pas un praticien</option>
@@ -110,12 +110,30 @@
                         <option value="6">Kinésithérapeute</option>
                     </select>
                 </div>
-                <div class="form-group m-1">
+
+                <div class="form-group m-3 text-center">
                     <button type="submit" class="btn btn-primary btn-block">Inscription</button>
                 </div>
+
             </form>
         </div>
     </div>
+
+    <script>
+        document.getElementById("statut-select").addEventListener("change", function() {
+            var specialiteDiv = document.getElementById("specialite-div");
+            var specialiteSelect = document.getElementById("specialite-select");
+            if (this.value == 1) {
+                specialiteDiv.style.display = "block";
+            } else {
+                specialiteDiv.style.display = "none";
+                if (this.value == 0 || this.value == 2) {
+                    specialiteSelect.value = 0;
+                }
+            }
+        });
+    </script>
+
     <p class="text-center">Vous avez déja un compte ?</p>
     <p class="text-center"><a href="router.php?action=connexion">Connectez vous</a></p>
 </div>

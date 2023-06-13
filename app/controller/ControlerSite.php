@@ -35,6 +35,11 @@ class ControllerSite
 
     public static function connection_traitement()
     {
+        if (!empty($_POST["rememberme"])) {
+            setcookie("username", $_POST["login"], time() + 86400); // on set les cookies a un jour 86400
+        } else {
+            setcookie("username", null, time() - 1);
+        }
         $Login = htmlspecialchars($_POST['login']);
         $password = htmlspecialchars($_POST['password']);
         $results = ModelPersonne::getUser($Login);

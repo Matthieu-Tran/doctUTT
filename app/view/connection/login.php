@@ -41,7 +41,7 @@
                          <input type="checkbox" name="rememberme" value="1" <?php if (isset($_COOKIE["username"])) { ?> checked <?php }  ?> />&nbsp;Remember username
                      </div>
                  </div>
-                 <div class="form-group">
+                 <div class="form-group text-center">
                      <button type="submit" class="btn btn-primary btn-block">Connexion</button>
                  </div>
              </form>

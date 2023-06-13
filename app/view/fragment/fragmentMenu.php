@@ -85,7 +85,15 @@ session_start();
             <?php
             }
             ?>
-            <li><a class="dropdown-item" href="router.php?action=deconnexion">Déconnexion</a></li>
+            <?php
+            //Si la personne est connecté, alors on n'affiche pas le login et l'inscription
+            if (isset($_SESSION['login'])) {
+            ?>
+              <li><a class="dropdown-item" href="router.php?action=deconnexion">Déconnexion</a></li>
+            <?php
+            }
+            ?>
+
           </ul>
         </li>
       </ul>

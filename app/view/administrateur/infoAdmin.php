@@ -44,7 +44,7 @@
                     "<tr><td>%d</td><td>%d</td><td>%d</td><td>%s</td></tr>",
                     $element->getId(),
                     $element->getPatientId(),
-                    $element->getPracticienId(),
+                    $element->getPraticienId(),
                     $element->getRdvDate(),
                 );
             }
