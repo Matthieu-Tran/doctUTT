@@ -148,4 +148,21 @@ class ControllerSite
         echo '<script>window.location.href = "router.php?action=acceuil";</script>'; // On redirige
         die();
     }
+
+    public static function fonctionnalite()
+    {
+        include 'config.php';
+        $vue = $root . '/app/view/innovations/fonctionnalite.html';
+        if (DEBUG)
+            echo ("ControllerSite : fonctionnalite : vue = $vue");
+        require($vue);
+    }
+    public static function mvc()
+    {
+        include 'config.php';
+        $vue = $root . '/app/view/innovations/mvc.html';
+        if (DEBUG)
+            echo ("ControllerSite : fonctionnalité : vue = $vue");
+        require($vue);
+    }
 }

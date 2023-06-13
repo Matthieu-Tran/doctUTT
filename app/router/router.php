@@ -51,6 +51,8 @@ switch ($action) {
   case "deconnexion";
   case "inscription_traitement":
   case "connection_traitement":
+  case "fonctionnalite":
+  case "mvc":
     ControllerSite::$action();
     break;
   case "afficherInfosCompte":
@@ -59,6 +61,7 @@ switch ($action) {
   case "selectionnezRdv":
   case "updateRdv":
     ControleurPatient::$action($args);
+    break;
     // Tache par défaut
   default:
     $action = "Accueil";

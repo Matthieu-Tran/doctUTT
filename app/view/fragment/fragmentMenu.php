@@ -68,8 +68,8 @@ session_start();
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovations</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="?">Proposez une fonctionnalité originale</a></li>
-            <li><a class="dropdown-item" href="?">Proposez une amélioration du code MVC</a></li>
+            <li><a class="dropdown-item" href="router.php?action=fonctionnalite">Proposez une fonctionnalité originale</a></li>
+            <li><a class="dropdown-item" href="router.php?action=mvc">Proposez une amélioration du code MVC</a></li>
           </ul>
         </li>
 
