@@ -1,0 +1,43 @@
+<div class="container rounded">
+  <div class="mt-4 p-5 text-white rounded">
+    <h1>Utilisation originale et innovante des données contenues dans la base.</h1>
+    <p>
+      Nous avons observé que les mot de passe contenu dans la base de donnée de l'applications sont stocké en clair. Or cela pose de gros soucis niveau RGPD et la sécurité des données des utilisateurs. Ainsi, en cherchant sur internet, nous avons trouvé une solutions pour ce problème ! Ci-dessous le code qui permet de hasher les mots de passe.
+    </p>
+    <img src="../../public/assets/inscription.png" alt="inscription_png">
+    <br>
+    <br>
+    <p>
+      Voici ce que bout de code fait:
+      Les paramètres de la fonction sont les suivants :
+      <ul>
+        <li>On définit un tableau associatif $cost avec une clé 'cost' et une valeur 12. Ce tableau est utilisé plus tard dans la fonction password_hash().</li>
+        <li>On appelle la fonction password_hash() afin d'hasher le mot de passe, elle prends plusieurs arguments:
+          <ul>
+            <li>
+              $password : Le mot de passe en clair que vous souhaitez hasher.
+            </li>
+            <li>
+              $algorithm : L'algorithme de hachage à utiliser. Il existe plusieurs algorithmes disponibles, mais le plus couramment utilisé est PASSWORD_BCRYPT, qui utilise l'algorithme BCrypt. Cet algorithme est recommandé car il est considéré comme sûr et résistant aux attaques par force brute.
+            </li>
+            <li>
+              $options : Un tableau associatif facultatif qui peut être utilisé pour spécifier des options supplémentaires pour l'algorithme de hachage. L'une des options les plus couramment utilisées est 'cost', qui définit la complexité du calcul du hash et affecte le temps nécessaire pour générer le hash. Une valeur plus élevée de 'cost' rend le hachage plus lent et plus sécurisé.
+            </li>
+          </ul>
+        </li>
+        <li>Et enfin, on insère la nouvelle personne inscrite avec son mot de passe hashé</li>
+      </ul>
+    </p>
+    <hr>
+    <p>
+      Enfin, lorsque l'utilisateur veut se connecter, on fait la même chose mais en comparant les deux mots de passe en utilisant le bout de code ci-dessous:
+    </p>
+    <img src="../../public/assets/connection.png" alt="conncetion_png">
+    <br>
+    <br>
+    <p>
+      On va donc regarder si l'utilisateur existe et s'il existe alors on va comparer le mot de passe qu'il a donné dans le formulaire de connection avec le mot de passe que l'on récupère dans la base de donnée. On utilise pour ça la fonction password_verify() pour comparer le mot de passe en clair ($password) avec le mot de passe haché ($mdp). Si les mots de passe correspondent, cela signifie que l'utilisateur a fourni les bonnes informations de connexion et l'exécution du code à l'intérieur du bloc conditionnel est poursuivie. Sinon, le code à l'intérieur du bloc conditionnel n'est pas exécuté.
+    </p>
+  </div>
+
+</div>
