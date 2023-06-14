@@ -79,6 +79,24 @@ class ModelRdv extends Model
         }
     }
 
+    public static function countRdvByDate($date)
+    {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT COUNT(*) as count FROM rendezvous WHERE DATE(rdv_date) = :date";
+            $statement = $database->prepare($query);
+            $statement->bindParam(':date', $date);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            return $result['count'];
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return 0;
+        }
+    }
+
+
 
     public static function getAll()
     {
