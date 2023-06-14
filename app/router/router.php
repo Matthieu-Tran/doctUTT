@@ -67,7 +67,6 @@ switch ($action) {
     $action = "Accueil";
     ControllerSite::$action();
 }
-
 require('../view/fragment/fragmentFooter.html');
 ?>
 <!-- ----- Fin Router1 -->
