@@ -140,11 +140,15 @@ class ModelPersonne
         }
     }
 
-    public static function getAllPraticiens()
+    public static function getPraticiensAvecRdvDisponibles()
     {
         try {
             $database = Model::getInstance();
-            $query = "SELECT * FROM personne WHERE statut = :statut";
+            $query = "SELECT DISTINCT p.*
+                  FROM personne AS p
+                  INNER JOIN rendezvous AS rdv ON rdv.praticien_id = p.id
+                  WHERE p.statut = :statut
+                  AND rdv.patient_id = 0";
             $stmt = $database->prepare($query);
             $stmt->bindValue(':statut', ModelPersonne::PRATICIEN, PDO::PARAM_INT);
             $stmt->execute();
@@ -155,6 +159,7 @@ class ModelPersonne
             return NULL;
         }
     }
+
 
     public static function getMany($query)
     {

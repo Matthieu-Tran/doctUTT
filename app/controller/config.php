@@ -20,7 +20,7 @@ if (LOCAL) {
     // Configuration de la base de données sur localhost
     $dsn = 'mysql:dbname=doctolib;host=localhost;charset=utf8';
     $username = 'root';
-    $password = 'root';
+    $password = '';
 }
 
 // chemin absolu vers le répertoire du projet SUR DEV-ISI 

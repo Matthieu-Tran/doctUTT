@@ -59,6 +59,7 @@ switch ($action) {
   case "selectionnezRdv":
   case "updateRdv":
     ControleurPatient::$action($args);
+    break;
     // Tache par défaut
   default:
     $action = "Accueil";

@@ -30,7 +30,7 @@ class ControleurPatient
     public static function listerRdvDispoPraticien()
     {
 
-        $praticiens = ModelPersonne::getAllPraticiens();
+        $praticiens = ModelPersonne::getPraticiensAvecRdvDisponibles();
 
         //Construction de la vue
         include 'config.php';
