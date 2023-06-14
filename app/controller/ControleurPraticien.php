@@ -35,15 +35,56 @@ class ControleurPraticien
             $nombreRdv = $_POST["nombre_rdv"];
             // Récupérer l'ID du praticien connecté
             $praticienId = $_SESSION['id'];
-            $date = $datePost . " " . "à 10h00";
 
-            // Ajouter une nouvelle disponibilité
-            $results = ModelRdv::ajouterRdvDisponibles($praticienId, $date, $nombreRdv);
+            $nbRdvExisted = ModelRdv::countRdvByDate($datePost);
+            if ($nombreRdv + $nbRdvExisted <= 9 && $nbRdvExisted < 9) {
 
-            //Construction chemin de la vue
-            include 'config.php';
-            $vue = $root . '/app/view/praticien/viewInsertedRdv.php';
-            require($vue);
+                switch ($nbRdvExisted) {
+                    case 0:
+                        $date = $datePost . " à 10h00";
+                        break;
+                    case 1:
+                        $date = $datePost . " à 11h00";
+                        break;
+                    case 2:
+                        $date = $datePost . " à 12h00";
+                        break;
+                    case 3:
+                        $date = $datePost . " à 13h00";
+                        break;
+                    case 4:
+                        $date = $datePost . " à 14h00";
+                        break;
+                    case 5:
+                        $date = $datePost . " à 15h00";
+                        break;
+                    case 6:
+                        $date = $datePost . " à 16h00";
+                        break;
+                    case 7:
+                        $date = $datePost . " à 17h00";
+                        break;
+                    case 8:
+                        $date = $datePost . " à 18h00";
+                        break;
+                    default:
+                        echo "Le nombre de rendez-vous est invalide.";
+                        break;
+                }
+
+                // Ajouter une nouvelle disponibilité
+                $results = ModelRdv::ajouterRdvDisponibles($praticienId, $date, $nombreRdv);
+
+                //Construction chemin de la vue
+                include 'config.php';
+                $vue = $root . '/app/view/praticien/viewInsertedRdv.php';
+                require($vue);
+            } else {
+                //Construction chemin de la vue
+                include 'config.php';
+                $vue = $root . '/app/view/praticien/viewRefusRdv.php';
+                require($vue);
+            }
         }
     }
 
