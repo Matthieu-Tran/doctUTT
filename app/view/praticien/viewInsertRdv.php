@@ -7,21 +7,23 @@ error_reporting(E_ALL);
 ?>
 
 
-<div class="container">
+<form role="form" method="POST" action="router.php?action=rdvCreated">
+    <div class="form-group">
+        <input type="hidden" name='action' value='rdvCreated'>
+        <label for="date">Date :</label>
+        <input type="date" id="date" name="date" min="<?php echo date('Y-m-d'); ?>" size='75' required><br>
 
-    <form role="form" method="POST" action="router.php?action=rdvCreated">
-        <div class="form-group">
-            <input type="hidden" name='action' value='rdvCreated'>
-            <label for="date">Date :</label>
-            <input type="date" id="date" name="date" size='75' required><br>
-
-            <label for="nombre_rdv">Nombre de rendez-vous :</label>
-            <input type="number" id="nombre_rdv" name="nombre_rdv" min="1" size='75' required><br>
-        </div>
-        <p />
-        <button class="btn btn-primary" type="submit">Go</button>
-    </form>
+        <label for="nombre_rdv">Nombre de rendez-vous :</label>
+        <input type="number" id="nombre_rdv" name="nombre_rdv" min="1" max="8" size='75' required><br>
+    </div>
     <p />
+    <button class="btn btn-primary" type="submit">Go</button>
+</form>
+
+<p />
+<button class="btn btn-primary" type="submit">Go</button>
+</form>
+<p />
 </div>
 
 

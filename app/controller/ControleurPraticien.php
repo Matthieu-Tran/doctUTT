@@ -36,31 +36,14 @@ class ControleurPraticien
             // Récupérer l'ID du praticien connecté
             $praticienId = $_SESSION['id'];
             $date = $datePost . " " . "à 10h00";
-            echo "test <br>";
-            echo "test <br>";
-            echo "test <br>";
-            echo "test <br>";
-            echo "test <br>";
-            echo "test <br>";
-            echo "test <br>";
-            echo "test <br>";
-            echo "test <br>";
-            echo "test <br>";
-
-            echo $date . ' ' . $praticienId . ' ' . $nombreRdv;
 
             // Ajouter une nouvelle disponibilité
             $results = ModelRdv::ajouterRdvDisponibles($praticienId, $date, $nombreRdv);
-            foreach ($results as $res) {
-                echo ("<li>idRdv = " . $res . "</li>");
-                echo ("<ul>");
-                echo ("<li>date = " . $_POST['date'] . "</li>");
-                echo ("</ul>");
-            }
-            // ----- Construction chemin de la vue
-            // include 'config.php';
-            // $vue = $root . '/app/view/praticien/viewInsertedRdv.php';
-            // require($vue);
+
+            //Construction chemin de la vue
+            include 'config.php';
+            $vue = $root . '/app/view/praticien/viewInsertedRdv.php';
+            require($vue);
         }
     }
 
