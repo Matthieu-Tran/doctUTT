@@ -54,6 +54,12 @@ class ControleurAdministrateur
     public static function specialiteInserer()
     {
         // Ajouter une validation des informations du formulaire
+        $label = htmlspecialchars($_GET['label']);
+        $results = ModelSpecialite::getLabelbyLabel($label);
+        if ($results !== NULL) {
+            echo '<script>window.location.href = "router.php?action=specialiteCreer&label_err=true";</script>';
+            die();
+        }
         $results = ModelSpecialite::insertSpecialite(
             htmlspecialchars($_GET['label'])
         );

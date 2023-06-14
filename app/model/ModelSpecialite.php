@@ -160,6 +160,25 @@ class ModelSpecialite extends Model
             throw new Exception("Erreur lors de la récupération du label de la spécialité par ID: " . $e->getMessage());
         }
     }
+
+    public static function getLabelbyLabel($label)
+    {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT * FROM specialite WHERE label = :label";
+            $stmt = $database->prepare($query);
+            $stmt->bindParam(':label', $label, PDO::PARAM_STR);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result) {
+                return $result;
+            } else {
+                return NULL;
+            }
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la récupération du label de la spécialité par label: " . $e->getMessage());
+        }
+    }
 }
 ?>
 <!-- ----- fin ModelSpecialite -->
