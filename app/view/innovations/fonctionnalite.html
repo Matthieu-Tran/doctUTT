@@ -38,13 +38,18 @@
     <p>
       On va donc regarder si l'utilisateur existe et s'il existe alors on va comparer le mot de passe qu'il a donné dans le formulaire de connection avec le mot de passe que l'on récupère dans la base de donnée. On utilise pour ça la fonction password_verify() pour comparer le mot de passe en clair ($password) avec le mot de passe haché ($mdp). Si les mots de passe correspondent, cela signifie que l'utilisateur a fourni les bonnes informations de connexion et l'exécution du code à l'intérieur du bloc conditionnel est poursuivie. Sinon, le code à l'intérieur du bloc conditionnel n'est pas exécuté.
     </p>
-    <hr>
     <p>
       <h4>      <b>Disclaimer !</b></h4>
 
       <br>
       On a du changer un peu la structure de la base de données car la taille de mot de passe dans le BD ne correspondait pas à la taille du hash donné par l'algorithme.
     </p>
+
+    <hr>
+    <p>De plus, nous avons aussi permis à l'utilisateur de sauvergarder son login lorsqu'il se connecte grâce aux cookies</p>
+    <img src="../../public/assets/page-connection.png" alt="page-connection_png">
+    <p>Le valeur de l'input remember username est sauvegardé dans le form et envoyé en données en controlleur. On regarde s'il est coché et si oui alors, on crée un cookie d'une valeur d'un jour sinon on supprime le cookie s'il en existe un déjà. Ainsi lorsque l'utilisateur veut se reconnecter sur la plateforme sous 24h, il pourra avoir son pseudo affiché afin d'éviter de le retaper dans la page de login.</p>
+    <img src="../../public/assets/remember-me.png" alt="rembember-me_png">
   </div>
 
 </div>
