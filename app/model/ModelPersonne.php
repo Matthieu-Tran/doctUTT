@@ -8,12 +8,10 @@ error_reporting(E_ALL);
 
 class ModelPersonne
 {
-
     private $id, $nom, $prenom, $adresse, $login, $password, $statut, $specialite_id;
-
-    public const ADMINISTRATEUR = 0;
-    public const PRATICIEN = 1;
-    public const PATIENT = 2;
+    const ADMINISTRATEUR = 0;
+    const PRATICIEN = 1;
+    const PATIENT = 2;
 
     public function __construct($id = NULL, $nom = NULL, $prenom = NULL, $adresse = NULL, $login = NULL, $password = NULL, $statut = NULL, $specialite_id = NULL)
     {
